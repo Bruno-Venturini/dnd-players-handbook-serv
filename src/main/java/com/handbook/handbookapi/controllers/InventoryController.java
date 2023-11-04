@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.net.URI;
+
 @RestController
-@RequestMapping("/inventory")
+@RequestMapping("api/inventory")
 public class InventoryController {
     @Autowired
     private InventoryService inventoryService;
@@ -18,6 +20,6 @@ public class InventoryController {
     public ResponseEntity<Inventory> add(Inventory inventory) {
         Inventory savedInventory = inventoryService.save(inventory);
 
-        return ResponseEntity.ok(savedInventory);
+        return ResponseEntity.created(URI.create("/api/inventory/" + savedInventory.getId())).body(savedInventory);
     }
 }

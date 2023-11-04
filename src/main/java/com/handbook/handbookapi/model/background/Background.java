@@ -1,5 +1,6 @@
 package com.handbook.handbookapi.model.background;
 
+import com.handbook.handbookapi.model.item.Item;
 import com.handbook.handbookapi.utils.AbstractEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "background")
