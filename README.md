@@ -1,4 +1,4 @@
-# Ddnd-players-handbook-serv
+# Dnd-players-handbook-serv
 
 API desenvolvida para prover acesso estruturado às informações do *Player’s Handbook* de Dungeons & Dragons (D\&D). Fornece endpoints para consultar classes, raças, habilidades, magias e demais elementos do universo D\&D 5e, com foco em desempenho e extensibilidade.
 - Projeto da disciplina de Back-end na Faculdade de Engenharia de Software 2023/02.
