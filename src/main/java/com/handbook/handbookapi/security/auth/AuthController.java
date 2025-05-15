@@ -101,7 +101,7 @@ public class AuthController {
         List<Role> all = roleRepository.findAll();
 
         if (all.isEmpty()) {
-           authService.initRoles();
+            authService.initRoles();
         }
 
         if (strRoles == null) {
