@@ -3,16 +3,12 @@ package com.handbook.handbookapi.inventory.item;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.handbook.handbookapi.value.CurrencyType;
 import com.handbook.handbookapi.value.Value;
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.data.domain.Page;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-@Getter
-@Setter
 public class ItemDTO {
 
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -27,6 +23,94 @@ public class ItemDTO {
     private ArmorType armorType;
     private String damage;
     private List<WeaponProperties> properties;
+
+    public Value getValue() {
+        return value;
+    }
+
+    public void setValue(Value value) {
+        this.value = value;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getWeight() {
+        return weight;
+    }
+
+    public void setWeight(Integer weight) {
+        this.weight = weight;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public Integer getStrength() {
+        return strength;
+    }
+
+    public void setStrength(Integer strength) {
+        this.strength = strength;
+    }
+
+    public Boolean getStealth() {
+        return stealth;
+    }
+
+    public void setStealth(Boolean stealth) {
+        this.stealth = stealth;
+    }
+
+    public Integer getArmorClass() {
+        return armorClass;
+    }
+
+    public void setArmorClass(Integer armorClass) {
+        this.armorClass = armorClass;
+    }
+
+    public ArmorType getArmorType() {
+        return armorType;
+    }
+
+    public void setArmorType(ArmorType armorType) {
+        this.armorType = armorType;
+    }
+
+    public String getDamage() {
+        return damage;
+    }
+
+    public void setDamage(String damage) {
+        this.damage = damage;
+    }
+
+    public List<WeaponProperties> getProperties() {
+        return properties;
+    }
+
+    public void setProperties(List<WeaponProperties> properties) {
+        this.properties = properties;
+    }
 
     public Item toEntity() {
         return switch (type) {

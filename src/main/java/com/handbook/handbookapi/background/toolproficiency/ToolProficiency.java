@@ -1,23 +1,41 @@
 package com.handbook.handbookapi.background.toolproficiency;
 
-import com.handbook.handbookapi.common.AbstractEntity;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.handbook.handbookapi.common.BaseEntity;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "tool_proficiencies")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@SequenceGenerator(name = AbstractEntity.SEQUENCE_GENERATOR, sequenceName = "seq_tool_proficiencies", allocationSize = 1)
-public class ToolProficiency extends AbstractEntity {
+@SequenceGenerator(name = "seq_tool_proficiencies", sequenceName = "seq_tool_proficiencies", allocationSize = 1)
+public class ToolProficiency implements BaseEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_tool_proficiencies")
+    @Column(name = "id")
+    private Long id;
 
     @Column(name = "tool_proficiency_type")
     @Enumerated(EnumType.STRING)
     private ToolProficiencyType toolProficiencyType;
+
+    public ToolProficiency() {
+    }
+
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public ToolProficiencyType getToolProficiencyType() {
+        return toolProficiencyType;
+    }
+
+    public void setToolProficiencyType(ToolProficiencyType toolProficiencyType) {
+        this.toolProficiencyType = toolProficiencyType;
+    }
 }

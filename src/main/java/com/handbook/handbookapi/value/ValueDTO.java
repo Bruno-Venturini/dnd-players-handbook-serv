@@ -1,15 +1,29 @@
 package com.handbook.handbookapi.value;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import java.util.Objects;
 
-@Getter
-@Setter
 public class ValueDTO {
     private Integer amount;
     private String currencyType;
+
+    public ValueDTO() {
+    }
+
+    public Integer getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Integer amount) {
+        this.amount = amount;
+    }
+
+    public String getCurrencyType() {
+        return currencyType;
+    }
+
+    public void setCurrencyType(String currencyType) {
+        this.currencyType = currencyType;
+    }
 
     public Value toEntity() {
         Value value = new Value();

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CharacterClassService extends AbstractService<CharacterClass, Long> {
+
     @Autowired
     private CharacterClassRepository characterClassRepository;
 

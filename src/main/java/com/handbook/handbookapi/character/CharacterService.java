@@ -230,7 +230,7 @@ public class CharacterService extends AbstractService<Character, Long> {
         }
 
          updateAttributes(character, finalStepDTO);
-        character.setIsCompleted(Boolean.TRUE);
+        character.setCompleted(Boolean.TRUE);
 
         CharacterClass characterClass = CharacterClassFactory.getCharacterClass(character.getCharacterClass());
         Integer baseHealth = calculateBaseHealth(character, characterClass);

@@ -1,19 +1,22 @@
 package com.handbook.handbookapi.background.skillproficiency;
 
-import com.handbook.handbookapi.background.toolproficiency.ToolProficiency;
-import com.handbook.handbookapi.background.toolproficiency.ToolProficiencyDTO;
-import lombok.Getter;
-import lombok.Setter;
+import java.util.List;
+import java.util.stream.Collectors;
 
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Collectors;
-import java.util.List;
-@Getter
-@Setter
 public class SkillProficiencyDTO {
 
     private SkillProficiencyType skillProficiencyType;
+
+    public SkillProficiencyDTO() {
+    }
+
+    public SkillProficiencyType getSkillProficiencyType() {
+        return skillProficiencyType;
+    }
+
+    public void setSkillProficiencyType(SkillProficiencyType skillProficiencyType) {
+        this.skillProficiencyType = skillProficiencyType;
+    }
 
     public static SkillProficiencyDTO fromEntity(SkillProficiency skillProficiency) {
         SkillProficiencyDTO dto = new SkillProficiencyDTO();

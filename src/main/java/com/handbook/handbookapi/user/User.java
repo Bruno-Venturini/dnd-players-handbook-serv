@@ -1,10 +1,7 @@
 package com.handbook.handbookapi.user;
 
-import com.handbook.handbookapi.common.AbstractEntity;
+import com.handbook.handbookapi.common.BaseEntity;
 import com.handbook.handbookapi.user.role.Role;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -18,11 +15,14 @@ import java.util.Set;
         uniqueConstraints = {
             @UniqueConstraint(columnNames = "username"),
             @UniqueConstraint(columnNames = "email")})
-@Getter
-@Setter
-@NoArgsConstructor
-@SequenceGenerator(name = AbstractEntity.SEQUENCE_GENERATOR, sequenceName = "seq_users")
-public class User extends AbstractEntity {
+
+@SequenceGenerator(name = "seq_users", sequenceName = "seq_users")
+public class User implements BaseEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_users")
+    @Column(name = "id", nullable = false)
+    private Long id;
 
     @Column(name = "username", nullable = false)
     @NotBlank
@@ -46,9 +46,54 @@ public class User extends AbstractEntity {
                 inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
+    public User() {
+    }
+
     public User(String username, String email, String password) {
         this.username = username;
         this.email = email;
         this.password = password;
+    }
+
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public @NotBlank @Size(max = 20) String getUsername() {
+        return username;
+    }
+
+    public void setUsername(@NotBlank @Size(max = 20) String username) {
+        this.username = username;
+    }
+
+    public @NotBlank @Size(max = 50) @Email String getEmail() {
+        return email;
+    }
+
+    public void setEmail(@NotBlank @Size(max = 50) @Email String email) {
+        this.email = email;
+    }
+
+    public @NotBlank @Size(max = 120) String getPassword() {
+        return password;
+    }
+
+    public void setPassword(@NotBlank @Size(max = 120) String password) {
+        this.password = password;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }

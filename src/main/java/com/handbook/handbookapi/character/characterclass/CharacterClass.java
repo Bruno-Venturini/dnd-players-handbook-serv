@@ -1,29 +1,49 @@
 package com.handbook.handbookapi.character.characterclass;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.handbook.handbookapi.common.AbstractEntity;
+import com.handbook.handbookapi.common.BaseEntity;
 import com.handbook.handbookapi.common.Die;
 import com.handbook.handbookapi.exceptions.GameRuleException;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.*;
 
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-public class CharacterClass extends AbstractEntity implements ICharacterClass  {
+public class CharacterClass implements ICharacterClass, BaseEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
 
     @Column(name = "class_type")
     @Enumerated(EnumType.STRING)
     private ClassType classType;
+
+    public CharacterClass() {
+    }
+
+    public CharacterClass(Long id, ClassType classType) {
+        this.id = id;
+        this.classType = classType;
+    }
+
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public ClassType getClassType() {
+        return classType;
+    }
+
+    public void setClassType(ClassType classType) {
+        this.classType = classType;
+    }
 
     @Override
     public void performLevelUp() {

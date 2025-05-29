@@ -2,9 +2,7 @@ package com.handbook.handbookapi.character.race;
 
 import com.handbook.handbookapi.common.AbilityType;
 import com.mysema.commons.lang.Pair;
-import lombok.Getter;
 
-@Getter
 public enum RaceType {
 
     HUMAN(new Pair<>(1, AbilityType.ALL), new Pair<>(null, null)),
@@ -16,6 +14,14 @@ public enum RaceType {
     HALF_ELF(new Pair<>(2, AbilityType.CHARISMA), new Pair<>(null, null)),
     HALF_ORC(new Pair<>(2, AbilityType.STRENGTH), new Pair<>(1, AbilityType.CONSTITUTION)),
     TIEFLING(new Pair<>(1, AbilityType.INTELLIGENCE), new Pair<>(2, AbilityType.CHARISMA));
+
+    public Pair<Integer, AbilityType> getMainAttributeModifier() {
+        return mainAttributeModifier;
+    }
+
+    public Pair<Integer, AbilityType> getSecondaryAttributeType() {
+        return secondaryAttributeType;
+    }
 
     private Pair<Integer, AbilityType> mainAttributeModifier;
     private Pair<Integer, AbilityType> secondaryAttributeType;

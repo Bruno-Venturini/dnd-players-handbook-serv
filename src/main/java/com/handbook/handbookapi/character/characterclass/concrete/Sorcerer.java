@@ -5,10 +5,12 @@ import com.handbook.handbookapi.character.characterclass.behaviors.ILevelUpBehav
 import com.handbook.handbookapi.character.characterclass.behaviors.ILongRestBehavior;
 import com.handbook.handbookapi.character.characterclass.behaviors.IShortRestBehavior;
 import com.handbook.handbookapi.common.Die;
-import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
 public class Sorcerer extends CharacterClass implements ILevelUpBehavior, ILongRestBehavior, IShortRestBehavior {
+
+    public Sorcerer() {
+    }
+
     @Override
     public void levelUp() {
 

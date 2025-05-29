@@ -1,18 +1,42 @@
 package com.handbook.handbookapi.inventory;
 
 import com.handbook.handbookapi.inventory.item.ItemDTO;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Getter
-@Setter
 public class InventoryDTO {
+
     private Long id;
     private List<ItemDTO> items;
     private Double capacity;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public List<ItemDTO> getItems() {
+        return items;
+    }
+
+    public void setItems(List<ItemDTO> items) {
+        this.items = items;
+    }
+
+    public Double getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(Double capacity) {
+        this.capacity = capacity;
+    }
+
+    public InventoryDTO() {
+    }
 
     public static InventoryDTO fromEntity(Inventory inventory) {
         InventoryDTO dto = new InventoryDTO();

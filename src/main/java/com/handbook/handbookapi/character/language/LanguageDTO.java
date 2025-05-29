@@ -1,16 +1,21 @@
 package com.handbook.handbookapi.character.language;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-@Getter
-@Setter
+
 public class LanguageDTO {
+
     private LanguageType languageType;
+
+    public LanguageType getLanguageType() {
+        return languageType;
+    }
+
+    public void setLanguageType(LanguageType languageType) {
+        this.languageType = languageType;
+    }
 
     public static LanguageDTO fromEntity(Language language) {
         if (Objects.isNull(language)) {

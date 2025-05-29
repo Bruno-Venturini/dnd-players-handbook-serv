@@ -1,23 +1,20 @@
 package com.handbook.handbookapi.spell;
 
-import com.handbook.handbookapi.common.AbstractEntity;
+import com.handbook.handbookapi.common.BaseEntity;
 import com.handbook.handbookapi.spell.component.Component;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name = "spells")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@SequenceGenerator(name = AbstractEntity.SEQUENCE_GENERATOR, sequenceName = "seq_spells", allocationSize = 1)
-public class Spell extends AbstractEntity {
+@SequenceGenerator(name = "seq_spells", sequenceName = "seq_spells", allocationSize = 1)
+public class Spell implements BaseEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_spells")
+    @Column(name = "id", nullable = false)
+    private Long id;
 
     @Column(name="name", nullable = false)
     private String name;
@@ -44,4 +41,73 @@ public class Spell extends AbstractEntity {
             inverseJoinColumns = @JoinColumn(name = "component_id")
     )
     private List<Component> components;
+
+    public Spell() {
+    }
+
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getCastingTime() {
+        return castingTime;
+    }
+
+    public void setCastingTime(Integer castingTime) {
+        this.castingTime = castingTime;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Double getRange() {
+        return range;
+    }
+
+    public void setRange(Double range) {
+        this.range = range;
+    }
+
+    public Integer getDuration() {
+        return duration;
+    }
+
+    public void setDuration(Integer duration) {
+        this.duration = duration;
+    }
+
+    public String getNecessaryObject() {
+        return necessaryObject;
+    }
+
+    public void setNecessaryObject(String necessaryObject) {
+        this.necessaryObject = necessaryObject;
+    }
+
+    public List<Component> getComponents() {
+        return components;
+    }
+
+    public void setComponents(List<Component> components) {
+        this.components = components;
+    }
 }

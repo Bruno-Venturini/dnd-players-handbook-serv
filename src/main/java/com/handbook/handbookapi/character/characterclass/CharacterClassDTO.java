@@ -1,15 +1,18 @@
 package com.handbook.handbookapi.character.characterclass;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import java.util.Objects;
 
-@Getter
-@Setter
 public class CharacterClassDTO {
 
     private ClassType classType;
+
+    public ClassType getClassType() {
+        return classType;
+    }
+
+    public void setClassType(ClassType classType) {
+        this.classType = classType;
+    }
 
     public static CharacterClassDTO fromEntity(CharacterClass characterClass) {
         if(Objects.isNull(characterClass)) {

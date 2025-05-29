@@ -1,13 +1,9 @@
 package com.handbook.handbookapi.skill;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import java.util.Objects;
 
-@Getter
-@Setter
 public class SkillDTO {
+
     private Integer acrobatics;
     private Integer animalHandling;
     private Integer arcana;
@@ -26,6 +22,153 @@ public class SkillDTO {
     private Integer insight;
     private Integer survival;
     private Integer deception;
+
+    public SkillDTO() {
+    }
+
+    public Integer getAcrobatics() {
+        return acrobatics;
+    }
+
+    public void setAcrobatics(Integer acrobatics) {
+        this.acrobatics = acrobatics;
+    }
+
+    public Integer getAnimalHandling() {
+        return animalHandling;
+    }
+
+    public void setAnimalHandling(Integer animalHandling) {
+        this.animalHandling = animalHandling;
+    }
+
+    public Integer getArcana() {
+        return arcana;
+    }
+
+    public void setArcana(Integer arcana) {
+        this.arcana = arcana;
+    }
+
+    public Integer getAthletics() {
+        return athletics;
+    }
+
+    public void setAthletics(Integer athletics) {
+        this.athletics = athletics;
+    }
+
+    public Integer getPerformance() {
+        return performance;
+    }
+
+    public void setPerformance(Integer performance) {
+        this.performance = performance;
+    }
+
+    public Integer getStealth() {
+        return stealth;
+    }
+
+    public void setStealth(Integer stealth) {
+        this.stealth = stealth;
+    }
+
+    public Integer getHistory() {
+        return history;
+    }
+
+    public void setHistory(Integer history) {
+        this.history = history;
+    }
+
+    public Integer getIntimidation() {
+        return intimidation;
+    }
+
+    public void setIntimidation(Integer intimidation) {
+        this.intimidation = intimidation;
+    }
+
+    public Integer getMedicine() {
+        return medicine;
+    }
+
+    public void setMedicine(Integer medicine) {
+        this.medicine = medicine;
+    }
+
+    public Integer getNature() {
+        return nature;
+    }
+
+    public void setNature(Integer nature) {
+        this.nature = nature;
+    }
+
+    public Integer getPerception() {
+        return perception;
+    }
+
+    public void setPerception(Integer perception) {
+        this.perception = perception;
+    }
+
+    public Integer getPersuasion() {
+        return persuasion;
+    }
+
+    public void setPersuasion(Integer persuasion) {
+        this.persuasion = persuasion;
+    }
+
+    public Integer getSleightOfHand() {
+        return sleightOfHand;
+    }
+
+    public void setSleightOfHand(Integer sleightOfHand) {
+        this.sleightOfHand = sleightOfHand;
+    }
+
+    public Integer getInvestigation() {
+        return investigation;
+    }
+
+    public void setInvestigation(Integer investigation) {
+        this.investigation = investigation;
+    }
+
+    public Integer getReligion() {
+        return religion;
+    }
+
+    public void setReligion(Integer religion) {
+        this.religion = religion;
+    }
+
+    public Integer getInsight() {
+        return insight;
+    }
+
+    public void setInsight(Integer insight) {
+        this.insight = insight;
+    }
+
+    public Integer getSurvival() {
+        return survival;
+    }
+
+    public void setSurvival(Integer survival) {
+        this.survival = survival;
+    }
+
+    public Integer getDeception() {
+        return deception;
+    }
+
+    public void setDeception(Integer deception) {
+        this.deception = deception;
+    }
 
     public static SkillDTO fromEntity(Skill skill) {
         if (Objects.isNull(skill)) {

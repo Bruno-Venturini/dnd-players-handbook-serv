@@ -1,24 +1,17 @@
 package com.handbook.handbookapi.skill;
 
-import com.handbook.handbookapi.common.AbstractEntity;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.handbook.handbookapi.common.BaseEntity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "skills")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@SequenceGenerator(name = AbstractEntity.SEQUENCE_GENERATOR, sequenceName = "seq_skills")
-public class Skill extends AbstractEntity {
+@SequenceGenerator(name = "seq_skills", sequenceName = "seq_skills")
+public class Skill implements BaseEntity {
+
+    @Id
+    @Column(name = "id", nullable = false)
+    private Long id;
 
     @Column(name = "acrobatics", nullable = false)
     private Integer acrobatics;
@@ -74,6 +67,9 @@ public class Skill extends AbstractEntity {
     @Column(name = "deception", nullable = false)
     private Integer deception;
 
+    public Skill() {
+    }
+
     public Skill (Integer startValue) {
         this.acrobatics = startValue;
         this.animalhandling = startValue;
@@ -93,5 +89,159 @@ public class Skill extends AbstractEntity {
         this.insight = startValue;
         this.survival = startValue;
         this.deception = startValue;
+    }
+
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Integer getAcrobatics() {
+        return acrobatics;
+    }
+
+    public void setAcrobatics(Integer acrobatics) {
+        this.acrobatics = acrobatics;
+    }
+
+    public Integer getAnimalhandling() {
+        return animalhandling;
+    }
+
+    public void setAnimalhandling(Integer animalhandling) {
+        this.animalhandling = animalhandling;
+    }
+
+    public Integer getArcana() {
+        return arcana;
+    }
+
+    public void setArcana(Integer arcana) {
+        this.arcana = arcana;
+    }
+
+    public Integer getAthletics() {
+        return athletics;
+    }
+
+    public void setAthletics(Integer athletics) {
+        this.athletics = athletics;
+    }
+
+    public Integer getPerformance() {
+        return performance;
+    }
+
+    public void setPerformance(Integer performance) {
+        this.performance = performance;
+    }
+
+    public Integer getStealth() {
+        return stealth;
+    }
+
+    public void setStealth(Integer stealth) {
+        this.stealth = stealth;
+    }
+
+    public Integer getHistory() {
+        return history;
+    }
+
+    public void setHistory(Integer history) {
+        this.history = history;
+    }
+
+    public Integer getIntimidation() {
+        return intimidation;
+    }
+
+    public void setIntimidation(Integer intimidation) {
+        this.intimidation = intimidation;
+    }
+
+    public Integer getMedicine() {
+        return medicine;
+    }
+
+    public void setMedicine(Integer medicine) {
+        this.medicine = medicine;
+    }
+
+    public Integer getNature() {
+        return nature;
+    }
+
+    public void setNature(Integer nature) {
+        this.nature = nature;
+    }
+
+    public Integer getPerception() {
+        return perception;
+    }
+
+    public void setPerception(Integer perception) {
+        this.perception = perception;
+    }
+
+    public Integer getPersuasion() {
+        return persuasion;
+    }
+
+    public void setPersuasion(Integer persuasion) {
+        this.persuasion = persuasion;
+    }
+
+    public Integer getSleightofhand() {
+        return sleightofhand;
+    }
+
+    public void setSleightofhand(Integer sleightofhand) {
+        this.sleightofhand = sleightofhand;
+    }
+
+    public Integer getInvestigation() {
+        return investigation;
+    }
+
+    public void setInvestigation(Integer investigation) {
+        this.investigation = investigation;
+    }
+
+    public Integer getReligion() {
+        return religion;
+    }
+
+    public void setReligion(Integer religion) {
+        this.religion = religion;
+    }
+
+    public Integer getInsight() {
+        return insight;
+    }
+
+    public void setInsight(Integer insight) {
+        this.insight = insight;
+    }
+
+    public Integer getSurvival() {
+        return survival;
+    }
+
+    public void setSurvival(Integer survival) {
+        this.survival = survival;
+    }
+
+    public Integer getDeception() {
+        return deception;
+    }
+
+    public void setDeception(Integer deception) {
+        this.deception = deception;
     }
 }

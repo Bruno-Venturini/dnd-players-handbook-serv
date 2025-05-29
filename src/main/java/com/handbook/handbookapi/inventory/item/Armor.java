@@ -1,23 +1,14 @@
 package com.handbook.handbookapi.inventory.item;
 
 
-import com.handbook.handbookapi.common.AbstractEntity;
 import com.handbook.handbookapi.value.Value;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "armors")
 @PrimaryKeyJoinColumn(name="item_id")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@SequenceGenerator(name = AbstractEntity.SEQUENCE_GENERATOR, sequenceName = "seq_armors", allocationSize = 1)
+@SequenceGenerator(name = "seq_armors", sequenceName = "seq_armors", allocationSize = 1)
 public class Armor extends Item {
 
     @Column(name = "strength")
@@ -32,6 +23,45 @@ public class Armor extends Item {
     @Column(name = "armor_type")
     @Enumerated(EnumType.STRING)
     private ArmorType armorType;
+
+    public Armor() {
+    }
+
+    public Integer getStrength() {
+        return strength;
+    }
+
+    public void setStrength(Integer strength) {
+        this.strength = strength;
+    }
+
+    public Boolean getStealth() {
+        return stealth;
+    }
+
+    public void setStealth(Boolean stealth) {
+        this.stealth = stealth;
+    }
+
+    public Integer getArmorClass() {
+        return armorClass;
+    }
+
+    public void setArmorClass(Integer armorClass) {
+        this.armorClass = armorClass;
+    }
+
+    public ArmorType getArmorType() {
+        return armorType;
+    }
+
+    public void setArmorType(ArmorType armorType) {
+        this.armorType = armorType;
+    }
+
+    public Armor(String name, Integer weight, Value value) {
+        super(name, weight, value);
+    }
 
     public Armor(String name, Integer weight, Value value, Integer strength, Boolean stealth, Integer armorClass, ArmorType armorType) {
         super(name, weight, value);

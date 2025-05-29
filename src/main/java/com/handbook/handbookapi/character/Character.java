@@ -3,18 +3,12 @@ package com.handbook.handbookapi.character;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.handbook.handbookapi.background.Background;
 import com.handbook.handbookapi.character.characterclass.CharacterClass;
-import com.handbook.handbookapi.character.characterclass.ICharacterClass;
 import com.handbook.handbookapi.character.language.Language;
 import com.handbook.handbookapi.character.race.Race;
-import com.handbook.handbookapi.character.race.RaceType;
-import com.handbook.handbookapi.common.AbstractEntity;
+import com.handbook.handbookapi.common.BaseEntity;
 import com.handbook.handbookapi.skill.Skill;
 import com.handbook.handbookapi.spell.Spell;
 import com.handbook.handbookapi.user.User;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -22,12 +16,13 @@ import java.util.List;
 
 @Entity
 @Table(name = "characters")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@SequenceGenerator(name = AbstractEntity.SEQUENCE_GENERATOR, sequenceName = "seq_characters", allocationSize = 1)
-public class Character extends AbstractEntity {
+@SequenceGenerator(name = "seq_characters", sequenceName = "seq_characters", allocationSize = 1)
+public class Character implements BaseEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_characters")
+    @Column(name = "id", nullable = false)
+    private Long id;
 
     @Column(name = "name")
     private String name;
@@ -123,6 +118,217 @@ public class Character extends AbstractEntity {
 
     @Column(name = "is_completed")
     private Boolean isCompleted = Boolean.FALSE;
+
+    public Character() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Background getBackground() {
+        return background;
+    }
+
+    public void setBackground(Background background) {
+        this.background = background;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Skill getSkill() {
+        return skill;
+    }
+
+    public void setSkill(Skill skill) {
+        this.skill = skill;
+    }
+
+    public List<Language> getLanguages() {
+        return languages;
+    }
+
+    public void setLanguages(List<Language> languages) {
+        this.languages = languages;
+    }
+
+    public List<Spell> getSpells() {
+        return spells;
+    }
+
+    public void setSpells(List<Spell> spells) {
+        this.spells = spells;
+    }
+
+    public Race getRace() {
+        return race;
+    }
+
+    public void setRace(Race race) {
+        this.race = race;
+    }
+
+    public Integer getExperience() {
+        return experience;
+    }
+
+    public void setExperience(Integer experience) {
+        this.experience = experience;
+    }
+
+    public Integer getProficiency() {
+        return proficiency;
+    }
+
+    public void setProficiency(Integer proficiency) {
+        this.proficiency = proficiency;
+    }
+
+    public Integer getArmorClass() {
+        return armorClass;
+    }
+
+    public void setArmorClass(Integer armorClass) {
+        this.armorClass = armorClass;
+    }
+
+    public Integer getInitiative() {
+        return initiative;
+    }
+
+    public void setInitiative(Integer initiative) {
+        this.initiative = initiative;
+    }
+
+    public Integer getMoveSpeed() {
+        return moveSpeed;
+    }
+
+    public void setMoveSpeed(Integer moveSpeed) {
+        this.moveSpeed = moveSpeed;
+    }
+
+    public Integer getLife() {
+        return life;
+    }
+
+    public void setLife(Integer life) {
+        this.life = life;
+    }
+
+    public String getHitDie() {
+        return hitDie;
+    }
+
+    public void setHitDie(String hitDie) {
+        this.hitDie = hitDie;
+    }
+
+    public Integer getTemporaryLife() {
+        return temporaryLife;
+    }
+
+    public void setTemporaryLife(Integer temporaryLife) {
+        this.temporaryLife = temporaryLife;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public CharacterClass getCharacterClass() {
+        return characterClass;
+    }
+
+    public void setCharacterClass(CharacterClass characterClass) {
+        this.characterClass = characterClass;
+    }
+
+    public Integer getLevel() {
+        return level;
+    }
+
+    public void setLevel(Integer level) {
+        this.level = level;
+    }
+
+    public Integer getIntelligence() {
+        return intelligence;
+    }
+
+    public void setIntelligence(Integer intelligence) {
+        this.intelligence = intelligence;
+    }
+
+    public Integer getStrength() {
+        return strength;
+    }
+
+    public void setStrength(Integer strength) {
+        this.strength = strength;
+    }
+
+    public Integer getConstitution() {
+        return constitution;
+    }
+
+    public void setConstitution(Integer constitution) {
+        this.constitution = constitution;
+    }
+
+    public Integer getWisdom() {
+        return wisdom;
+    }
+
+    public void setWisdom(Integer wisdom) {
+        this.wisdom = wisdom;
+    }
+
+    public Integer getDexterity() {
+        return dexterity;
+    }
+
+    public void setDexterity(Integer dexterity) {
+        this.dexterity = dexterity;
+    }
+
+    public Integer getCharisma() {
+        return charisma;
+    }
+
+    public void setCharisma(Integer charisma) {
+        this.charisma = charisma;
+    }
+
+    public Boolean getCompleted() {
+        return isCompleted;
+    }
+
+    public void setCompleted(Boolean completed) {
+        isCompleted = completed;
+    }
 
     public void setAllAttributes(Integer value) {
         this.intelligence = value;

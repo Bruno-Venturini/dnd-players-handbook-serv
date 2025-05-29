@@ -2,7 +2,6 @@ package com.handbook.handbookapi.character.characterclass;
 
 import com.handbook.handbookapi.character.characterclass.concrete.*;
 import com.handbook.handbookapi.exceptions.GameRuleException;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public class CharacterClassFactory {
 

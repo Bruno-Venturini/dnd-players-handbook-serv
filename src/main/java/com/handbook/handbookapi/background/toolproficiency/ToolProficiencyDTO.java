@@ -1,15 +1,19 @@
 package com.handbook.handbookapi.background.toolproficiency;
 
-import lombok.Getter;
-import lombok.Setter;
-import java.util.stream.Collectors;
 import java.util.List;
+import java.util.stream.Collectors;
 
-@Getter
-@Setter
 public class ToolProficiencyDTO {
 
     private ToolProficiencyType toolProficiencyType;
+
+    public ToolProficiencyType getToolProficiencyType() {
+        return toolProficiencyType;
+    }
+
+    public void setToolProficiencyType(ToolProficiencyType toolProficiencyType) {
+        this.toolProficiencyType = toolProficiencyType;
+    }
 
     public static ToolProficiencyDTO fromEntity(ToolProficiency toolProficiency) {
         ToolProficiencyDTO dto = new ToolProficiencyDTO();
