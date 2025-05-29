@@ -35,6 +35,21 @@ import java.util.Objects;
 @Service
 public class CharacterService extends AbstractService<Character, Long> {
 
+    public static final int BASE_MOV_SPEED = 10;
+    public static final int BASE_ARMOR_CLASS = 10;
+    public static final int BASE_LEVEL = 1;
+    public static final String MSG_ERROR_DELETE_CHARACTER = "Error deleting character: %s";
+    public static final String MSG_CHARACTER_NOT_FOUND = "Character not found";
+    public static final String MSG_ERROR_UPDATE_LANGUAGES = "Error updating languages: %s";
+    public static final String MSG_LANGUAGE_NOT_FOUND = "Language %s not found";
+    public static final String MSG_ERROR_UPDATE_SKILL = "Error adding skill %s";
+    public static final String MSG_ERROR_ATTRIBUTE_LEVEL_INVALID = "Skills cannot be higher than 20 nor be lower than 0";
+    public static final int MAX_SKILL_LEVEL = 20;
+    public static final int MIN_ATTRIBUTE_LEVEL = 0;
+    public static final String MSG_CLASS_NOT_FOUND = "Class % not found";
+    public static final String MSG_RACE_NOT_FOUND = "Race not found";
+    public static final int MIN_SKILL_LEVEL = 0;
+
     @Autowired
     private CharacterRepository characterRepository;
 
@@ -76,11 +91,11 @@ public class CharacterService extends AbstractService<Character, Long> {
         User user = new User();
         user.setId(userDetails.getId());
 
-        Skill skill = new Skill(0);
+        Skill skill = new Skill(MIN_SKILL_LEVEL);
         character.setSkill(skill);
 
         character.setUser(user);
-        character.setAllAttributes(0);
+        character.setAllAttributes(MIN_ATTRIBUTE_LEVEL);
 
         Character characterSaved = save(character);
 
@@ -95,7 +110,7 @@ public class CharacterService extends AbstractService<Character, Long> {
         Race raceSaved = raceService.findByRaceType(race.getRaceType());
 
         if (Objects.isNull(raceSaved)) {
-            throw new GameRuleException("Race not found");
+            throw new GameRuleException(MSG_RACE_NOT_FOUND);
         }
         character.setRace(raceSaved);
 
@@ -112,7 +127,7 @@ public class CharacterService extends AbstractService<Character, Long> {
         CharacterClass characterClassSaved = characterClassService.findByClassType(characterClass.getClassType());
 
         if (Objects.isNull(characterClassSaved)) {
-            throw new GameRuleException("Class " + characterClass.getClassType().toString().toLowerCase() + " not found");
+            throw new GameRuleException(String.format(MSG_CLASS_NOT_FOUND, characterClass.getClassType().toString().toLowerCase()));
         }
 
         character.setCharacterClass(characterClassSaved);
@@ -125,10 +140,10 @@ public class CharacterService extends AbstractService<Character, Long> {
     }
 
     private static void validateAttributes(Character character) {
-        boolean hasInvalidAttribute = character.getAllAttributes().stream().anyMatch(attribute -> attribute > 20 || attribute < 0);
+        boolean hasInvalidAttribute = character.getAllAttributes().stream().anyMatch(attribute -> attribute > MAX_SKILL_LEVEL || attribute < MIN_ATTRIBUTE_LEVEL);
 
         if (hasInvalidAttribute) {
-            throw new GameRuleException("Skills cannot be higher than 20 nor be lower than 0");
+            throw new GameRuleException(MSG_ERROR_ATTRIBUTE_LEVEL_INVALID);
         }
     }
 
@@ -180,7 +195,7 @@ public class CharacterService extends AbstractService<Character, Long> {
                 Integer fieldValue = (Integer) field.get(skill);
                 field.set(skill, fieldValue + character.getProficiency());
             } catch (Exception e) {
-                throw new GameRuleException("Não foi possível adicionar a skill " + skillName);
+                throw new GameRuleException(String.format(MSG_ERROR_UPDATE_SKILL, skillName));
             }
         });
 
@@ -192,7 +207,7 @@ public class CharacterService extends AbstractService<Character, Long> {
             Character character = characterRepository.findById(idCharacter).orElse(null);
 
             if (Objects.isNull(character)) {
-                throw new GameRuleException("Character not found");
+                throw new GameRuleException(MSG_CHARACTER_NOT_FOUND);
             }
 
             List<Language> languagesSaved = new ArrayList<>();
@@ -204,7 +219,7 @@ public class CharacterService extends AbstractService<Character, Long> {
                     if(Objects.nonNull(languageSaved) && !languagesSaved.contains(languageSaved)) {
                         languagesSaved.add(languageSaved);
                     } else {
-                        throw new GameRuleException("Language " + language.getLanguageType().toString().toLowerCase() + " not found");
+                        throw new GameRuleException(String.format(MSG_LANGUAGE_NOT_FOUND,  language.getLanguageType().toString().toLowerCase()));
                     }
                 });
 
@@ -212,7 +227,7 @@ public class CharacterService extends AbstractService<Character, Long> {
                 return save(character);
             }
         } catch (Exception e) {
-            throw new GameRuleException("Error updating languages: " + e.getMessage());
+            throw new GameRuleException(String.format(MSG_ERROR_UPDATE_LANGUAGES, e.getMessage()));
         }
 
         return null;
@@ -222,7 +237,7 @@ public class CharacterService extends AbstractService<Character, Long> {
         Character character = characterRepository.findById(idCharacter).orElse(null);
 
         if (Objects.isNull(character)) {
-            throw new GameRuleException("Character not found");
+            throw new GameRuleException(MSG_CHARACTER_NOT_FOUND);
         }
 
         if(Objects.nonNull(finalStepDTO.getName())) {
@@ -237,10 +252,10 @@ public class CharacterService extends AbstractService<Character, Long> {
 
         character.setHitDie(characterClass.getHitDie().toString());
         character.setLife(baseHealth);
-        character.setMoveSpeed(10 + character.getDexterity());
+        character.setMoveSpeed(BASE_MOV_SPEED + character.getDexterity());
         character.setInitiative(character.getDexterity());
-        character.setArmorClass(10 + character.getDexterity());
-        character.setLevel(1);
+        character.setArmorClass(BASE_ARMOR_CLASS + character.getDexterity());
+        character.setLevel(BASE_LEVEL);
 
         return save(character);
     }
@@ -270,7 +285,7 @@ public class CharacterService extends AbstractService<Character, Long> {
 
             delete(idCharacter);
         } catch (Exception e) {
-            throw new GameRuleException("Error deleting character: " + e.getMessage());
+            throw new GameRuleException(String.format(MSG_ERROR_DELETE_CHARACTER, e.getMessage()));
         }
     }
 }
