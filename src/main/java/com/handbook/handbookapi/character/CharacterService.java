@@ -72,8 +72,7 @@ public class CharacterService extends AbstractService<Character, Long> {
     protected JpaRepository<Character, Long> getRepository() { return characterRepository; }
 
     public Page<Character> findAllByUserId(Pageable pageable) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+        UserDetailsImpl userDetails = getUserDetails();
 
         return characterRepository.findAllWithPredicate(QCharacter.character.user.id.eq(userDetails.getId()), pageable);
     }
@@ -84,9 +83,17 @@ public class CharacterService extends AbstractService<Character, Long> {
 
     public Character createCharacter() {
         Character character = new Character();
+        setNewCharacterStats(character);
 
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+        Character characterSaved = save(character);
+
+        inventoryService.createNewInventory(characterSaved);
+
+        return characterSaved;
+    }
+
+    private static void setNewCharacterStats(Character character) {
+        UserDetailsImpl userDetails = getUserDetails();
 
         User user = new User();
         user.setId(userDetails.getId());
@@ -96,12 +103,12 @@ public class CharacterService extends AbstractService<Character, Long> {
 
         character.setUser(user);
         character.setAllAttributes(MIN_ATTRIBUTE_LEVEL);
+    }
 
-        Character characterSaved = save(character);
-
-        inventoryService.createNewInventory(characterSaved);
-
-        return characterSaved;
+    private static UserDetailsImpl getUserDetails() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+        return userDetails;
     }
 
 
@@ -187,6 +194,12 @@ public class CharacterService extends AbstractService<Character, Long> {
         Character character = getById(idCharacter);
         Skill skill = character.getSkill();
 
+        setAndValidadeSkillFields(listSkills, skill, character);
+
+        return save(character);
+    }
+
+    private static void setAndValidadeSkillFields(List<String> listSkills, Skill skill, Character character) {
         listSkills.forEach(skillName -> {
             try {
                 Field field = skill.getClass().getDeclaredField(skillName.toLowerCase());
@@ -198,8 +211,6 @@ public class CharacterService extends AbstractService<Character, Long> {
                 throw new GameRuleException(String.format(MSG_ERROR_UPDATE_SKILL, skillName));
             }
         });
-
-        return save(character);
     }
 
     public Character updateLanguages(Long idCharacter, List<Language> languages) {
@@ -213,15 +224,7 @@ public class CharacterService extends AbstractService<Character, Long> {
             List<Language> languagesSaved = new ArrayList<>();
 
             if(Objects.nonNull(languages)) {
-                languages.stream().forEach(language -> {
-                    Language languageSaved = languageService.findByLanguageType(language.getLanguageType());
-
-                    if(Objects.nonNull(languageSaved) && !languagesSaved.contains(languageSaved)) {
-                        languagesSaved.add(languageSaved);
-                    } else {
-                        throw new GameRuleException(String.format(MSG_LANGUAGE_NOT_FOUND,  language.getLanguageType().toString().toLowerCase()));
-                    }
-                });
+                setAndValidateLanguages(languages, languagesSaved);
 
                 character.setLanguages(languagesSaved);
                 return save(character);
@@ -233,6 +236,18 @@ public class CharacterService extends AbstractService<Character, Long> {
         return null;
     }
 
+    private void setAndValidateLanguages(List<Language> languages, List<Language> languagesSaved) {
+        languages.stream().forEach(language -> {
+            Language languageSaved = languageService.findByLanguageType(language.getLanguageType());
+
+            if(Objects.nonNull(languageSaved) && !languagesSaved.contains(languageSaved)) {
+                languagesSaved.add(languageSaved);
+            } else {
+                throw new GameRuleException(String.format(MSG_LANGUAGE_NOT_FOUND,  language.getLanguageType().toString().toLowerCase()));
+            }
+        });
+    }
+
     public Character updateFinalStep(Long idCharacter, FinalStepDTO finalStepDTO) {
         Character character = characterRepository.findById(idCharacter).orElse(null);
 
@@ -240,11 +255,17 @@ public class CharacterService extends AbstractService<Character, Long> {
             throw new GameRuleException(MSG_CHARACTER_NOT_FOUND);
         }
 
+        setFinalCharacterStats(finalStepDTO, character);
+
+        return save(character);
+    }
+
+    private void setFinalCharacterStats(FinalStepDTO finalStepDTO, Character character) {
         if(Objects.nonNull(finalStepDTO.getName())) {
             character.setName(finalStepDTO.getName());
         }
 
-         updateAttributes(character, finalStepDTO);
+        updateAttributes(character, finalStepDTO);
         character.setCompleted(Boolean.TRUE);
 
         CharacterClass characterClass = CharacterClassFactory.getCharacterClass(character.getCharacterClass());
@@ -256,8 +277,6 @@ public class CharacterService extends AbstractService<Character, Long> {
         character.setInitiative(character.getDexterity());
         character.setArmorClass(BASE_ARMOR_CLASS + character.getDexterity());
         character.setLevel(BASE_LEVEL);
-
-        return save(character);
     }
 
     private void updateAttributes(Character character, FinalStepDTO finalStepDTO) {
