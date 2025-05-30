@@ -1,21 +1,19 @@
 package com.handbook.handbookapi.inventory;
 
-import com.handbook.handbookapi.exceptions.GameRuleException;
 import com.handbook.handbookapi.character.Character;
+import com.handbook.handbookapi.common.AbstractService;
+import com.handbook.handbookapi.exceptions.GameRuleException;
 import com.handbook.handbookapi.exceptions.MaximumWeightException;
 import com.handbook.handbookapi.inventory.item.Item;
 import com.handbook.handbookapi.inventory.item.ItemDTO;
 import com.handbook.handbookapi.inventory.item.ItemService;
-import com.handbook.handbookapi.common.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.*;
-
-
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -66,6 +64,7 @@ public class InventoryService extends AbstractService<Inventory, Long> {
         return save(inventory);
     }
 
+
     public Inventory addItem(Long idInventory, String itemName) {
         try {
             RestTemplate restTemplate = new RestTemplate();
@@ -103,10 +102,10 @@ public class InventoryService extends AbstractService<Inventory, Long> {
         try {
             Inventory inventory = findById(idInventory);
 
-            if(Objects.nonNull(inventory)) {
+            if (Objects.nonNull(inventory)) {
                 List<Item> items = inventory.getItems();
 
-                if(Objects.nonNull(items)) {
+                if (Objects.nonNull(items)) {
                     items.forEach(item -> itemService.delete(item));
                 }
             }

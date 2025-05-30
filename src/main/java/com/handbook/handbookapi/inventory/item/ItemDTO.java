@@ -148,6 +148,12 @@ public class ItemDTO {
         return itemDTO;
     }
 
+    /**
+     * Converts a LinkedHashMap representation of an item from the D&D 5e API into an ItemDTO.
+     *
+     * @param json The LinkedHashMap containing item data from the API.
+     * @return An ItemDTO populated with the data from the LinkedHashMap.
+     */
     public static ItemDTO fromApi(LinkedHashMap<?, ?> json) {
         ItemDTO itemDTO = new ItemDTO();
         Value itemValue = new Value();

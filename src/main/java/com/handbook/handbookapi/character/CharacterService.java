@@ -199,6 +199,10 @@ public class CharacterService extends AbstractService<Character, Long> {
         return save(character);
     }
 
+
+     /** This method uses reflection to set the skill fields dynamically based on the provided list of skill names.
+     * It retrieves the field by name, makes it accessible, and updates its value by adding the character's proficiency.
+     */
     private static void setAndValidadeSkillFields(List<String> listSkills, Skill skill, Character character) {
         listSkills.forEach(skillName -> {
             try {
@@ -260,6 +264,10 @@ public class CharacterService extends AbstractService<Character, Long> {
         return save(character);
     }
 
+    /**
+     * This method sets the final character stats based on the provided FinalStepDTO.
+     * It updates the character's name, attributes, and other stats like hit die, life, move speed, initiative, armor class, and level.
+     */
     private void setFinalCharacterStats(FinalStepDTO finalStepDTO, Character character) {
         if(Objects.nonNull(finalStepDTO.getName())) {
             character.setName(finalStepDTO.getName());
