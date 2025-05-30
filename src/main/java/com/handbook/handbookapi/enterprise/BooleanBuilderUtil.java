@@ -11,7 +11,7 @@ import java.time.LocalDate;
 public class BooleanBuilderUtil {
 
     public static BooleanBuilder buildPredicateFromFilter(String filter, Class<?> className) {
-        if(filter == null || filter.isEmpty()) {
+        if (filter == null || filter.isEmpty()) {
             return new BooleanBuilder();
         }
 
@@ -83,7 +83,7 @@ public class BooleanBuilderUtil {
     }
 
     public static Expression getType(Class<?> fieldType, String part) {
-        if(fieldType == Integer.class || fieldType == int.class) {
+        if (fieldType == Integer.class || fieldType == int.class) {
             return Expressions.constant(Integer.parseInt(part));
         } else if (fieldType == Double.class || fieldType == double.class) {
             return Expressions.constant(Double.parseDouble(part));
@@ -98,11 +98,10 @@ public class BooleanBuilderUtil {
     private static Field getRecursiveField(Class<?> className, String fieldName) throws NoSuchFieldException {
         try {
             return className.getDeclaredField(fieldName);
-        } catch (NoSuchFieldException e){
-            if(className.getSuperclass() != null) {
+        } catch (NoSuchFieldException e) {
+            if (className.getSuperclass() != null) {
                 return getRecursiveField(className.getSuperclass(), fieldName);
-            }
-            else {
+            } else {
                 throw e;
             }
         }

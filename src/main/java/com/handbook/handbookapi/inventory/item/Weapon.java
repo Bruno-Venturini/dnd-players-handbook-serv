@@ -9,7 +9,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "weapons")
-@PrimaryKeyJoinColumn(name="item_id")
+@PrimaryKeyJoinColumn(name = "item_id")
 @SequenceGenerator(name = "seq_weapons", sequenceName = "seq_weapons")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Weapon extends Item implements BaseEntity {

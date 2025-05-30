@@ -14,7 +14,6 @@ public interface CustomQuerydslPredicateExecutor<T> extends QuerydslPredicateExe
     List<T> findAll(Predicate predicate);
 
 
-
     default List<T> findAll(String filter, Class<T> entityType) {
         BooleanBuilder booleanBuilder = BooleanBuilderUtil.buildPredicateFromFilter(filter, entityType);
         return this.findAll(booleanBuilder);

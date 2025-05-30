@@ -1,6 +1,7 @@
 package com.handbook.handbookapi.background.toolproficiency;
 
 public enum ToolProficiencyType {
+
     ALCHEMISTS_SUPPLIES,
     BREWERS_SUPPLIES,
     CALIGRAPHERS_SUPPLIES,

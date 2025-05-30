@@ -21,7 +21,7 @@ public interface BaseService<T extends BaseEntity, ID> {
      * Update passed entity from id by passed entity.
      * If not exist entity by id throw exception {@link ResourceNotFoundException}
      *
-     * @param id id
+     * @param id     id
      * @param entity entity
      * @return updated entity
      */

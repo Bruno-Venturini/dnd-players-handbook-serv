@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 @RestController
 @RequestMapping("/characters")
 public class CharacterController {
@@ -72,15 +73,15 @@ public class CharacterController {
     }
 
     @PostMapping("/{idCharacter}/language")
-    public ResponseEntity<CharacterDTO> updateLanguages(@PathVariable("idCharacter") Long idCharacter, @RequestBody List<Language> languages){
-       Character saved = characterService.updateLanguages(idCharacter, languages);
-       CharacterDTO characterDTO = CharacterDTO.fromEntity(saved);
+    public ResponseEntity<CharacterDTO> updateLanguages(@PathVariable("idCharacter") Long idCharacter, @RequestBody List<Language> languages) {
+        Character saved = characterService.updateLanguages(idCharacter, languages);
+        CharacterDTO characterDTO = CharacterDTO.fromEntity(saved);
 
-       return ResponseEntity.ok(characterDTO);
+        return ResponseEntity.ok(characterDTO);
     }
 
     @PostMapping("/{idCharacter}/skill")
-    public ResponseEntity<CharacterDTO> updateSkills(@PathVariable("idCharacter") Long idCharacter, @RequestBody List<String> skills){
+    public ResponseEntity<CharacterDTO> updateSkills(@PathVariable("idCharacter") Long idCharacter, @RequestBody List<String> skills) {
         Character saved = characterService.updateSkills(idCharacter, skills);
         CharacterDTO characterDTO = CharacterDTO.fromEntity(saved);
 
@@ -88,7 +89,7 @@ public class CharacterController {
     }
 
     @PostMapping("/{idCharacter}/final-step")
-    public ResponseEntity<CharacterDTO> updateFinalStep(@PathVariable("idCharacter") Long idCharacter,  @RequestBody FinalStepDTO finalStepDTO) {
+    public ResponseEntity<CharacterDTO> updateFinalStep(@PathVariable("idCharacter") Long idCharacter, @RequestBody FinalStepDTO finalStepDTO) {
         Character saved = characterService.updateFinalStep(idCharacter, finalStepDTO);
         CharacterDTO characterDTO = CharacterDTO.fromEntity(saved);
 

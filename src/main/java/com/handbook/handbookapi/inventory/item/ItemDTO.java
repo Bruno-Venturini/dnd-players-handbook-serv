@@ -114,7 +114,8 @@ public class ItemDTO {
 
     public Item toEntity() {
         return switch (type) {
-            case "WEAPON" -> new Weapon(this.getName(), this.getWeight(), this.getValue(), this.getDamage(), this.getProperties());
+            case "WEAPON" ->
+                    new Weapon(this.getName(), this.getWeight(), this.getValue(), this.getDamage(), this.getProperties());
             case "ARMOR" -> new Armor(this.getName(), this.getWeight(), this.getValue(), this.getStrength(),
                     this.getStealth(), this.getArmorClass(), this.getArmorType());
             default -> new Item(this.getName(), this.getWeight(), this.getValue());
@@ -129,14 +130,14 @@ public class ItemDTO {
         itemDTO.setType("ITEM");
         itemDTO.setValue(item.getValue());
 
-        if(item instanceof Weapon) {
+        if (item instanceof Weapon) {
             Weapon weapon = (Weapon) item;
             itemDTO.setDamage(weapon.getDamage());
             itemDTO.setProperties(weapon.getProperties());
             itemDTO.setType("WEAPON");
         }
 
-        if(item instanceof Armor) {
+        if (item instanceof Armor) {
             Armor armor = (Armor) item;
             itemDTO.setStrength(armor.getStrength());
             itemDTO.setStealth(armor.getStealth());
@@ -167,7 +168,7 @@ public class ItemDTO {
         itemDTO.setValue(itemValue);
         itemDTO.setType("ITEM");
 
-        if(json.get("strength") != null) {
+        if (json.get("strength") != null) {
             itemDTO.setStrength((Integer) json.get("strength"));
             itemDTO.setStealth((Boolean) json.get("stealth_disadvantage"));
             itemDTO.setArmorClass((Integer) json.get("armor_class"));
@@ -175,7 +176,7 @@ public class ItemDTO {
             itemDTO.setType("ARMOR");
         }
 
-        if(json.get("damage") != null) {
+        if (json.get("damage") != null) {
             itemDTO.setDamage((String) ((LinkedHashMap<?, ?>) json.get("damage")).get("damage_dice"));
             itemDTO.setProperties(
                     ((ArrayList<LinkedHashMap<?, ?>>) json.get("properties"))

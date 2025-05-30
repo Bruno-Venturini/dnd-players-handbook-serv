@@ -16,18 +16,18 @@ public class SwaggerConfig {
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
-            .select()
-            .apis(RequestHandlerSelectors.basePackage("com.handbook.handbookapi"))
-            .build()
-            .pathMapping("/")
-            .apiInfo(apiInfo());
+                .select()
+                .apis(RequestHandlerSelectors.basePackage("com.handbook.handbookapi"))
+                .build()
+                .pathMapping("/")
+                .apiInfo(apiInfo());
     }
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-            .title("DND Player's Handbook API")
-            .description("Full documentation")
-            .version("1.0")
-            .build();
+                .title("DND Player's Handbook API")
+                .description("Full documentation")
+                .version("1.0")
+                .build();
     }
 }

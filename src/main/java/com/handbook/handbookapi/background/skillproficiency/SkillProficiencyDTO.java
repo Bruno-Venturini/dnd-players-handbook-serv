@@ -23,14 +23,14 @@ public class SkillProficiencyDTO {
         dto.setSkillProficiencyType(skillProficiency.getSkillProficiencyType());
 
         return dto;
-    };
+    }
 
     public SkillProficiency toEntity() {
         SkillProficiency skillProficiency = new SkillProficiency();
         skillProficiency.setSkillProficiencyType(this.getSkillProficiencyType());
 
         return skillProficiency;
-    };
+    }
 
     public static List<SkillProficiencyDTO> fromEntity(List<SkillProficiency> skillProficiencies) {
         return skillProficiencies.stream().map(SkillProficiencyDTO::fromEntity).collect(Collectors.toList());

@@ -70,7 +70,7 @@ public class Skill implements BaseEntity {
     public Skill() {
     }
 
-    public Skill (Integer startValue) {
+    public Skill(Integer startValue) {
         this.acrobatics = startValue;
         this.animalhandling = startValue;
         this.arcana = startValue;

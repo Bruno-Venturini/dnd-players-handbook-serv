@@ -15,7 +15,7 @@ public class CharacterClassDTO {
     }
 
     public static CharacterClassDTO fromEntity(CharacterClass characterClass) {
-        if(Objects.isNull(characterClass)) {
+        if (Objects.isNull(characterClass)) {
             return null;
         }
         CharacterClassDTO dto = new CharacterClassDTO();

@@ -1,11 +1,11 @@
 package com.handbook.handbookapi.character;
 
-import com.handbook.handbookapi.character.characterclass.CharacterClassService;
-import com.handbook.handbookapi.character.language.Language;
 import com.handbook.handbookapi.background.Background;
 import com.handbook.handbookapi.background.BackgroundService;
 import com.handbook.handbookapi.character.characterclass.CharacterClass;
 import com.handbook.handbookapi.character.characterclass.CharacterClassFactory;
+import com.handbook.handbookapi.character.characterclass.CharacterClassService;
+import com.handbook.handbookapi.character.language.Language;
 import com.handbook.handbookapi.character.language.LanguageService;
 import com.handbook.handbookapi.character.race.Race;
 import com.handbook.handbookapi.character.race.RaceService;
@@ -69,7 +69,9 @@ public class CharacterService extends AbstractService<Character, Long> {
     private RaceService raceService;
 
     @Override
-    protected JpaRepository<Character, Long> getRepository() { return characterRepository; }
+    protected JpaRepository<Character, Long> getRepository() {
+        return characterRepository;
+    }
 
     public Page<Character> findAllByUserId(Pageable pageable) {
         UserDetailsImpl userDetails = getUserDetails();
@@ -160,11 +162,11 @@ public class CharacterService extends AbstractService<Character, Long> {
         Pair<Integer, AbilityType> pairMainAttribute = race.getRaceType().getMainAttributeModifier();
         Pair<Integer, AbilityType> pairSecondaryAttribute = race.getRaceType().getSecondaryAttributeType();
 
-        if(Objects.nonNull(pairMainAttribute.getFirst())) {
+        if (Objects.nonNull(pairMainAttribute.getFirst())) {
             addPairAtributes(pairMainAttribute, character);
         }
 
-        if(Objects.nonNull(pairSecondaryAttribute.getFirst())) {
+        if (Objects.nonNull(pairSecondaryAttribute.getFirst())) {
             addPairAtributes(pairSecondaryAttribute, character);
         }
     }
@@ -200,7 +202,8 @@ public class CharacterService extends AbstractService<Character, Long> {
     }
 
 
-     /** This method uses reflection to set the skill fields dynamically based on the provided list of skill names.
+    /**
+     * This method uses reflection to set the skill fields dynamically based on the provided list of skill names.
      * It retrieves the field by name, makes it accessible, and updates its value by adding the character's proficiency.
      */
     private static void setAndValidadeSkillFields(List<String> listSkills, Skill skill, Character character) {
@@ -227,7 +230,7 @@ public class CharacterService extends AbstractService<Character, Long> {
 
             List<Language> languagesSaved = new ArrayList<>();
 
-            if(Objects.nonNull(languages)) {
+            if (Objects.nonNull(languages)) {
                 setAndValidateLanguages(languages, languagesSaved);
 
                 character.setLanguages(languagesSaved);
@@ -244,10 +247,10 @@ public class CharacterService extends AbstractService<Character, Long> {
         languages.stream().forEach(language -> {
             Language languageSaved = languageService.findByLanguageType(language.getLanguageType());
 
-            if(Objects.nonNull(languageSaved) && !languagesSaved.contains(languageSaved)) {
+            if (Objects.nonNull(languageSaved) && !languagesSaved.contains(languageSaved)) {
                 languagesSaved.add(languageSaved);
             } else {
-                throw new GameRuleException(String.format(MSG_LANGUAGE_NOT_FOUND,  language.getLanguageType().toString().toLowerCase()));
+                throw new GameRuleException(String.format(MSG_LANGUAGE_NOT_FOUND, language.getLanguageType().toString().toLowerCase()));
             }
         });
     }
@@ -269,7 +272,7 @@ public class CharacterService extends AbstractService<Character, Long> {
      * It updates the character's name, attributes, and other stats like hit die, life, move speed, initiative, armor class, and level.
      */
     private void setFinalCharacterStats(FinalStepDTO finalStepDTO, Character character) {
-        if(Objects.nonNull(finalStepDTO.getName())) {
+        if (Objects.nonNull(finalStepDTO.getName())) {
             character.setName(finalStepDTO.getName());
         }
 
@@ -288,10 +291,10 @@ public class CharacterService extends AbstractService<Character, Long> {
     }
 
     private void updateAttributes(Character character, FinalStepDTO finalStepDTO) {
-        if(Objects.nonNull(character)) {
+        if (Objects.nonNull(character)) {
             addRaceAttributes(character);
 
-            if(Objects.nonNull(finalStepDTO)) {
+            if (Objects.nonNull(finalStepDTO)) {
                 character.sumAttributes(finalStepDTO.getIntelligence(),
                         finalStepDTO.getStrength(),
                         finalStepDTO.getConstitution(),

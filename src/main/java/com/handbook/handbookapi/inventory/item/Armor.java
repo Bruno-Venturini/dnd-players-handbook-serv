@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "armors")
-@PrimaryKeyJoinColumn(name="item_id")
+@PrimaryKeyJoinColumn(name = "item_id")
 @SequenceGenerator(name = "seq_armors", sequenceName = "seq_armors", allocationSize = 1)
 public class Armor extends Item {
 

@@ -6,7 +6,7 @@ import com.mysema.commons.lang.Pair;
 public enum RaceType {
 
     HUMAN(new Pair<>(1, AbilityType.ALL), new Pair<>(null, null)),
-    DWARF(new Pair<>(2, AbilityType.CONSTITUTION), new Pair<>(null,null)),
+    DWARF(new Pair<>(2, AbilityType.CONSTITUTION), new Pair<>(null, null)),
     ELF(new Pair<>(2, AbilityType.DEXTERITY), new Pair<>(null, null)),
     HALFLING(new Pair<>(2, AbilityType.DEXTERITY), new Pair<>(null, null)),
     DRAGONBORN(new Pair<>(2, AbilityType.STRENGTH), new Pair<>(1, AbilityType.CHARISMA)),

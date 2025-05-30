@@ -1,8 +1,8 @@
 package com.handbook.handbookapi.user.refreshtoken;
 
-import com.handbook.handbookapi.user.UserRepository;
 import com.handbook.handbookapi.common.AbstractService;
 import com.handbook.handbookapi.enterprise.TokenRefreshException;
+import com.handbook.handbookapi.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -26,7 +26,9 @@ public class RefreshTokenService extends AbstractService<RefreshToken, Long> {
     private UserRepository userRepository;
 
     @Override
-    protected JpaRepository<RefreshToken, Long> getRepository() { return refreshTokenRepository; }
+    protected JpaRepository<RefreshToken, Long> getRepository() {
+        return refreshTokenRepository;
+    }
 
     public Optional<RefreshToken> findByToken(String token) {
         return refreshTokenRepository.findByToken(token);

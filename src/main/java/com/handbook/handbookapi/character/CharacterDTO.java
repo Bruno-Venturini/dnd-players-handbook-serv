@@ -308,6 +308,7 @@ public class CharacterDTO {
         List<CharacterDTO> charactersFind = characters.stream().map(character -> fromEntity(character)).collect(Collectors.toList());
         return charactersFind;
     }
+
     public static Page<CharacterDTO> fromEntity(Page<Character> characters) {
         List<CharacterDTO> charactersFind = characters.stream().map(character -> fromEntity(character)).collect(Collectors.toList());
         Page<CharacterDTO> charactersDTO = new PageImpl<>(charactersFind, characters.getPageable(), characters.getTotalElements());

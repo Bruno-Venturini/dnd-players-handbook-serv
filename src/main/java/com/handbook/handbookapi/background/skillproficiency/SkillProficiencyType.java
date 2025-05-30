@@ -25,5 +25,6 @@ public enum SkillProficiencyType {
 
     private AbilityType abilityType;
 
-    SkillProficiencyType(AbilityType abilityType) {}
+    SkillProficiencyType(AbilityType abilityType) {
+    }
 }

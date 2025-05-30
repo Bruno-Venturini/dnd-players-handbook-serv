@@ -20,14 +20,14 @@ public class ToolProficiencyDTO {
         dto.setToolProficiencyType(toolProficiency.getToolProficiencyType());
 
         return dto;
-    };
+    }
 
     public ToolProficiency toEntity() {
         ToolProficiency toolProficiency = new ToolProficiency();
         toolProficiency.setToolProficiencyType(this.getToolProficiencyType());
 
         return toolProficiency;
-    };
+    }
 
     public static List<ToolProficiencyDTO> fromEntity(List<ToolProficiency> toolProficiencies) {
         return toolProficiencies.stream().map(ToolProficiencyDTO::fromEntity).collect(Collectors.toList());

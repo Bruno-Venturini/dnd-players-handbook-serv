@@ -11,7 +11,7 @@ public class GameRuleException extends RuntimeException {
         super(message);
     }
 
-    public GameRuleException(String message, Throwable cause){
+    public GameRuleException(String message, Throwable cause) {
         super(message, cause);
     }
 }

@@ -1,10 +1,6 @@
 package com.handbook.handbookapi.inventory;
 
-import com.handbook.handbookapi.character.Character;
-import com.handbook.handbookapi.character.CharacterDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,7 +38,7 @@ public class InventoryController {
     }
 
     @PostMapping("/{idInventory}/add-item")
-    public ResponseEntity<InventoryDTO> addItem(@PathVariable("idInventory") Long idInventory,@RequestBody String itemName) {
+    public ResponseEntity<InventoryDTO> addItem(@PathVariable("idInventory") Long idInventory, @RequestBody String itemName) {
         Inventory inventory = inventoryService.addItem(idInventory, itemName);
         InventoryDTO inventoryDTO = InventoryDTO.fromEntity(inventory);
 

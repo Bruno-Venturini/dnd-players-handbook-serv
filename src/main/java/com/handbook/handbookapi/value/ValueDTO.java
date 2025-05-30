@@ -35,7 +35,8 @@ public class ValueDTO {
     public static ValueDTO fromEntity(Value value) {
         if (Objects.isNull(value)) {
             return null;
-        };
+        }
+        ;
 
         ValueDTO valueDTO = new ValueDTO();
         valueDTO.setAmount(value.getAmount());
